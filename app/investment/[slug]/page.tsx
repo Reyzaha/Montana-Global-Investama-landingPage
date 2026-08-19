@@ -208,108 +208,109 @@ export default async function InvestmentDetailPage({
           COMMERCIAL INFORMATION
       ========================================= */}
 
-      {project.commercial && (
+      {(project.commercial || project.allocationProject) && (
         <section className="detail-section">
           <div className="container">
             <div className="detail-two-column">
-              <div>
-                <p className="eyebrow">Commercial Structure</p>
 
-                <h2 className="detail-section-title">
-                  Project Economics
-                </h2>
+                {project.allocationProject && (
+                <div>
+                  <h2 className="detail-section-title">
+                    Alokasi Project Investment
+                  </h2>
 
-                <p className="detail-text">
-                  The following information presents the commercial
-                  assumptions currently available for this project.
-                  Final investment calculations and return projections
-                  remain subject to business, legal, financial, technical,
-                  and operational assessment.
-                </p>
-              </div>
+                  <table className="spec-table">
+                    <tbody>
+                      <tr>
+                        <td>Alokasi dana</td>
+                        <td>{project.goalsInvestment}</td>
+                      </tr>
+                      
+                      <tr>
+                        <td>Struktur Biaya</td>
+                        <td>
+                          {project.allocationProject.costStructure.map((item) => (
+                            <div key={item}>{item}</div>
+                          ))}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Mitigasi Resiko</td>
+                        <td>
+                          {project.allocationProject.riskMitigation.map((item) => (
+                            <div key={item}>{item}</div>
+                          ))}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
               <table className="spec-table">
                 <tbody>
-                  {project.commercial.purchasePrice && (
+                  {project.commercial?.purchasePrice && (
                     <tr>
                       <td>Harga Pokok Pembelian</td>
-                      <td>
-                        {project.commercial.purchasePrice}
-                      </td>
+                      <td>{project.commercial.purchasePrice}</td>
                     </tr>
                   )}
-
-                  {project.commercial.sellingPrice && (
+                  {project.commercial?.sellingPrice && (
                     <tr>
                       <td>Harga Pokok Penjualan</td>
-                      <td>
-                        {project.commercial.sellingPrice}
-                      </td>
+                      <td>{project.commercial.sellingPrice}</td>
                     </tr>
                   )}
-
-                  {project.commercial.successFee && (
+                  {project.commercial?.successFee && (
                     <tr>
                       <td>Success Fee Penjualan</td>
-                      <td>
-                        {project.commercial.successFee}
-                      </td>
+                      <td>{project.commercial.successFee}</td>
                     </tr>
                   )}
-
-                  {project.commercial.importFee && (
+                  {project.commercial?.importFee && (
                     <tr>
                       <td>Import Fee</td>
                       <td>
-                        {project.commercial.importFee}
+                        {project.commercial.importFee.map((fee) => (
+                          <div key={fee}>{fee}</div>
+                        ))}
                       </td>
                     </tr>
                   )}
-
-                  {project.commercial.vat && (
+                  {project.commercial?.vat && (
                     <tr>
                       <td>PPN</td>
                       <td>{project.commercial.vat}</td>
                     </tr>
                   )}
-
-                  {project.commercial.refurbishment && (
+                  {project.commercial?.refurbishment && (
                     <tr>
                       <td>Biaya Rekondisi</td>
-                      <td>
-                        {project.commercial.refurbishment}
-                      </td>
+                      <td>{project.commercial.refurbishment}</td>
                     </tr>
                   )}
-
-                  {project.commercial.warranty && (
+                  {project.commercial?.warranty && (
                     <tr>
-                      <td>Budget Garansi</td>
-                      <td>
-                        {project.commercial.warranty}
-                      </td>
+                      <td>Alokasi Garansi</td>
+                      <td>{project.commercial.warranty}</td>
                     </tr>
                   )}
-
-                  {project.commercial.incentive && (
+                  {project.commercial?.incentive && (
                     <tr>
-                      <td>Budget Insentif</td>
-                      <td>
-                        {project.commercial.incentive}
-                      </td>
+                      <td>Alokasi Insentif</td>
+                      <td>{project.commercial.incentive}</td>
                     </tr>
                   )}
-
-                  {project.commercial.investorMargin && (
+                  {project.commercial?.investorMargin && (
                     <tr>
                       <td>Margin Investor Nett</td>
-                      <td>
-                        {project.commercial.investorMargin}
-                      </td>
+                      <td>{project.commercial.investorMargin}</td>
                     </tr>
                   )}
                 </tbody>
               </table>
+
+            
             </div>
           </div>
         </section>
@@ -324,35 +325,22 @@ export default async function InvestmentDetailPage({
           <div className="detail-two-column">
             <div>
               <p className="eyebrow">Project Overview</p>
-
-              <h2 className="detail-section-title">
-                About This Opportunity
-              </h2>
-
-              <p className="detail-text">
-                {project.overview}
-              </p>
-
+              <h2 className="detail-section-title">About This Opportunity</h2>
+              <p className="detail-text">{project.overview}</p>
               {project.location && (
                 <p className="detail-text">
                   <strong>Lokasi:</strong> {project.location}
                 </p>
               )}
-
               {project.countryOfOrigin && (
                 <p className="detail-text">
-                  <strong>Negara Asal:</strong>{" "}
-                  {project.countryOfOrigin}
+                  <strong>Negara Asal:</strong> {project.countryOfOrigin}
                 </p>
               )}
             </div>
-
             {project.features && (
               <div>
-                <h2 className="detail-section-title">
-                  Fitur Utama
-                </h2>
-
+                <h2 className="detail-section-title">Fitur Utama</h2>
                 <ul className="feature-list">
                   {project.features.map((feature) => (
                     <li key={feature}>{feature}</li>
@@ -364,19 +352,11 @@ export default async function InvestmentDetailPage({
         </div>
       </section>
 
-      {/* =========================================
-          ADVANTAGES
-      ========================================= */}
-
       {project.advantages && (
         <section className="detail-section">
           <div className="container">
             <p className="eyebrow">Value</p>
-
-            <h2 className="detail-section-title">
-              Keunggulan
-            </h2>
-
+            <h2 className="detail-section-title">Keunggulan</h2>
             <ul className="feature-list">
               {project.advantages.map((advantage) => (
                 <li key={advantage}>{advantage}</li>
@@ -386,47 +366,30 @@ export default async function InvestmentDetailPage({
         </section>
       )}
 
-      {/* =========================================
-          TECHNICAL SPECIFICATIONS
-      ========================================= */}
-
-      {project.specifications &&
-        project.specifications.length > 0 && (
-          <section className="detail-section section-soft">
-            <div className="container">
-              <p className="eyebrow">Technical Data</p>
-
-              <h2 className="detail-section-title">
-                Spesifikasi Teknis
-              </h2>
-
-              <table className="spec-table">
-                <tbody>
-                  {project.specifications.map((specification) => (
-                    <tr key={specification.label}>
-                      <td>{specification.label}</td>
-                      <td>{specification.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        )}
-
-      {/* =========================================
-          SERVICES
-      ========================================= */}
+      {project.specifications && project.specifications.length > 0 && (
+        <section className="detail-section section-soft">
+          <div className="container">
+            <p className="eyebrow">Technical Data</p>
+            <h2 className="detail-section-title">Spesifikasi Teknis</h2>
+            <table className="spec-table">
+              <tbody>
+                {project.specifications.map((specification) => (
+                  <tr key={specification.label}>
+                    <td>{specification.label}</td>
+                    <td>{specification.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       {project.services && (
         <section className="detail-section">
           <div className="container">
             <p className="eyebrow">After Sales</p>
-
-            <h2 className="detail-section-title">
-              Jaminan & Layanan Unit
-            </h2>
-
+            <h2 className="detail-section-title">Jaminan & Layanan Unit</h2>
             <ul className="feature-list">
               {project.services.map((service) => (
                 <li key={service}>{service}</li>

@@ -719,6 +719,39 @@ img {
   line-height: 1.9;
 }
 
+.allocation-project-detail {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.allocation-project-title {
+  margin: 0 0 20px;
+  color: var(--navy);
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+}
+
+.allocation-project-group {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.allocation-project-group strong {
+  color: var(--navy);
+}
+
+.allocation-project-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 18px;
+}
+
 .feature-list {
   margin: 24px 0 0;
   padding: 0;

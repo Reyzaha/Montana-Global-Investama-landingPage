@@ -22,7 +22,7 @@ export default function InvestmentPage() {
           <div className="investment-grid">
             {investmentProjects.map((project) => {
               const isAvailable = project.status === "running";
-              const fundedPercent = isAvailable ? 65 : 0;
+              const fundedPercent = isAvailable ? 60 : 0;
 
               return (
                 <article key={project.slug} className="investment-card">
@@ -58,7 +58,7 @@ export default function InvestmentPage() {
                   </div>
 
                   <div className="investment-funding-value">
-                    <strong>{project.minimumInvestment}</strong>
+                    <strong>{project.goalsInvestment}</strong>
                     <span>{fundedPercent}% funded</span>
                   </div>
 

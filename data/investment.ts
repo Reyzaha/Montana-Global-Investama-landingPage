@@ -16,6 +16,7 @@ export type InvestmentProject = {
    */
   images: string[];
 
+  goalsInvestment: string;
   minimumInvestment: string;
   period: string;
   requirement?: string;
@@ -37,11 +38,17 @@ export type InvestmentProject = {
   specifications?: { label: string; value: string }[];
   services?: string[];
   videoUrl?: string;
+  allocationProject?: {
+    allocationLabel: string;
+    allocationValue: string;
+    costStructure: string[];
+    riskMitigation: string[];
+  };
   commercial?: {
     purchasePrice?: string;
     sellingPrice?: string;
     successFee?: string;
-    importFee?: string;
+    importFee?: string[];
     vat?: string;
     refurbishment?: string;
     warranty?: string;
@@ -69,6 +76,7 @@ const projectRecords = [
       "/bull4.jpg",
     ],
 
+    goalsInvestment: "Rp20 Miliar",
     minimumInvestment: "Rp20 Miliar",
     period: "12 Bulan",
     requirement: "35 Unit",
@@ -76,25 +84,50 @@ const projectRecords = [
   },
 
   {
-    slug: "pc57-7",
-    name: "PC57-7",
-    status: "coming-soon",
+    slug: "ecavator-komatsu-pc57-7",
+    name: "Komatsu PC57-7",
+    status: "running",
     category: "Equipment",
 
     description:
       "Project PC57-7 merupakan peluang strategic equipment yang sedang dipersiapkan Montana Global Investama untuk pengembangan dan perputaran bisnis.",
 
-    image: "/pc571.jpg",
+    image: "/bull5.jpg",
 
     images: [
-      "/pc571.jpg",
-      "/pc572.jpg",
-      "/pc573.jpg",
-      "/pc574.jpg",
+      "/bull5.jpg",
+      "/bull6.jpg",
+      "/bull7.jpg",
+      "/bull8.jpg",
     ],
 
-    minimumInvestment: "Rp2 Miliar",
+    goalsInvestment: "Rp20.000.000.000",
+    minimumInvestment: "Rp2.000.000.000",
     period: "12 Bulan",
+    simulatedReturn: "7,8%",
+    requirement: "-",
+    commercial: {
+      purchasePrice: "Rp150.000.000",
+      sellingPrice: "Rp346.000.000",
+      successFee: "12%",
+      importFee: [
+        "Rp130.000.000 / Container 20FT",
+        "Rp160.000.000 / Container 40FT",
+      ],
+      vat: "11%",
+      refurbishment: "Rp25.000.000 / Unit",
+      warranty: "1%",
+      incentive: "1%",
+    },
+    allocationProject: {
+      allocationLabel: "Alokasi dana",
+      allocationValue: "Ponor ~73 Unit PC57-7",
+      costStructure: ["Success Fee Penjualan 12%", "Garansi 1%", "Insentif 1%"],
+      riskMitigation: [
+        "Grade Resiko: B",
+      ],
+    },
+
   },
 ] satisfies Array<
   Pick<
@@ -106,10 +139,13 @@ const projectRecords = [
     | "description"
     | "image"
     | "images"
+    | "goalsInvestment"
     | "minimumInvestment"
     | "period"
     | "requirement"
     | "simulatedReturn"
+    | "allocationProject"
+    | "commercial"
   >
 >;
 
